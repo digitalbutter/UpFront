@@ -27,6 +27,8 @@
     position: relative;
     background: rgba(255,255,255, 0.8);
     border-bottom: 3px solid #aaa;
+    border-right: 1px solid #aaa;
+    border-left: 1px solid #aaa;
 }
 
 .skinElement {
