@@ -1,11 +1,10 @@
 <?php
-
 if(!$mgr = $modx->getAuthenticatedUser('mgr')){
 	return;
 }
 
-$managerUrl = $modx->context->getOption('manager_url', $modx->config, $modx->_userConfig);
-$assetsUrl = $modx->context->getOption('assets_url', $modx->config, $modx->_userConfig);
+$managerUrl = $modx->context->getOption('manager_url');
+$assetsUrl = $modx->context->getOption('assets_url');
 $upfrontAssetsUrl = $assetsUrl . 'components/upfront/assets/';
 $_SERVER['HTTP_MODAUTH'] = $modx->site_id;
 $action = $modx->getOption('action', $_GET, '30');
@@ -96,7 +95,7 @@ $context = $modx->getObject('modContext',$resource->get('context_key'));
 $rte = isset($_REQUEST['which_editor']) ? $_REQUEST['which_editor'] : $context->getOption('which_editor', '', $modx->_userConfig);
 $properties['which_editor'] = $rte;
 
-if ($context->getOption('use_editor', false, $modx->_userConfig) && !empty($rte)) {
+if ($context->getOption('use_editor') && !empty($rte)) {
 	if ($rte == 'TinyMCE'){
 		$modx->regClientScript('
 		<script type="text/javascript">
