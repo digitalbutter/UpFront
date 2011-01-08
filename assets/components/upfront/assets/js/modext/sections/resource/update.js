@@ -17,7 +17,6 @@ MODx.page.UpdateResource = function(config) {
         url: MODx.config.connectors_url+'resource/index.php'
         ,which_editor: 'none'
         ,formpanel: 'modx-panel-resource'
-        
         ,id: 'modx-page-update-resource'
         ,actions: {
             'new': MODx.action['resource/create']

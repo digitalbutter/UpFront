@@ -431,6 +431,7 @@ MODx.panel.Resource = function(config) {
        showTree = true;
     }
 
+	
     
     var its = [];
     its.push({
@@ -511,6 +512,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
         }
         this.fireEvent('ready');
         this.initialized = true;
+        
     }
     
     ,beforeSubmit: function(o) {        
@@ -546,6 +548,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             var n = t.getNodeById(v);
             n.leaf = false;
             t.refreshNode(v,true);
+            
         }
         if (o.result.object.class_key != this.defaultClassKey && this.config.resource != '' && this.config.resource != 0) {
             location.href = location.href;
