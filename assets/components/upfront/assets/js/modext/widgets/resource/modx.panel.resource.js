@@ -376,6 +376,9 @@ MODx.panel.Resource = function(config) {
         ,class_key: config.record.class_key || 'modDocument'
         ,template: config.record.template
         ,anchor: '100%'
+        ,autoHeight: true
+        ,width: '100%'
+        ,bodyStyle: 'padding: 15px 15px 15px 0;'
     });
     
     if (config.access_permissions) {
@@ -462,7 +465,7 @@ MODx.panel.Resource = function(config) {
         ,class_key: 'modResource'
         ,resource: ''
         ,bodyStyle: ''
-        ,defaults: { collapsible: true ,autoHeight: true }
+        ,defaults: { collapsible: false ,autoHeight: true }
         ,forceLayout: true
         ,items: its
         ,fileUpload: true
