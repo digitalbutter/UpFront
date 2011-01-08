@@ -1,4 +1,4 @@
-<?
+<?php
 
 $_lang['upfront_welcome-back'] = 'Welcome back [[+username]]';
 $_lang['upfront_resource_saved'] = 'Saved';
