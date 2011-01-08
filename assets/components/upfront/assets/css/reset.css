@@ -6,6 +6,10 @@
     width: 90%;
 }
 
+#modx-mainpanel {
+	width: 100%;
+}
+
 #upfront_inner {
 	background: white;
     border-right: 2px solid red;
@@ -26,4 +30,9 @@
 
 #modx-stay-menu {
 	display: none;
+}
+
+#modx-tv-tabs, #modx-tv-tabs .x-tab-panel-header, #modx-tv-tabs .x-tab-panel-body {
+	/* @TODO: fix this brutal hack - ext is misconfigured somewhere, this is a temp fix. */
+	width: 100% !important;
 }
