@@ -1,3 +1,0 @@
-<?
-
-echo "HERE"; exit();
