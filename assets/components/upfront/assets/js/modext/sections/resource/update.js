@@ -9,6 +9,7 @@
 MODx.page.UpdateResource = function(config) {
     config = config || {record:{}};
     config.record = config.record || {};
+    config.animateCollapse = config.animateCollapse || false;
     Ext.apply(config.record,{
         'parent-cmb': config.record['parent']
     });
@@ -16,6 +17,7 @@ MODx.page.UpdateResource = function(config) {
         url: MODx.config.connectors_url+'resource/index.php'
         ,which_editor: 'none'
         ,formpanel: 'modx-panel-resource'
+        
         ,id: 'modx-page-update-resource'
         ,actions: {
             'new': MODx.action['resource/create']
@@ -25,14 +27,70 @@ MODx.page.UpdateResource = function(config) {
         ,loadStay: true
         ,components: [{
             xtype: 'modx-panel-resource'
+            ,collapsible: true
             ,renderTo: 'modx-panel-resource-div'
             ,resource: config.resource
             ,record: config.record || {}
             ,publish_document: config.publish_document
             ,access_permissions: config.access_permissions
+        },{
+        	xtype: 'button'
+        	,text: 'Edit this page'
+        	,renderTo: 'upfront_wrapper'
+        	,id: 'upfront-toggle-open'
+        	,cls: 'upfront-toggle'
+        	,listeners: {
+                click: {fn:function(r) {
+                	var formPanel = Ext.getCmp('modx-panel-resource');
+                	var openToggle = Ext.getCmp('upfront-toggle-open');
+                	var closeToggle = Ext.getCmp('upfront-toggle-collapse');
+                	var wrapper = Ext.get('upfront_wrapper');
+                	var actionButtons = Ext.getCmp('modx-action-buttons');
+                	var actionButtonsWrapper = Ext.get('modAB');
+                	
+                	actionButtonsWrapper.removeClass('collapsed');
+                	formPanel.expand(config.animateCollapse);
+                	actionButtons.show();
+                	openToggle.disable();
+                	closeToggle.enable();
+                	
+                	
+                },scope:this}
+            }
+        },{
+        	xtype: 'button'
+        	,text: 'Close'
+        	,renderTo: 'upfront_wrapper'
+        	,id: 'upfront-toggle-collapse'
+        	,cls: 'upfront-toggle'
+        	,disabled: true
+        	,listeners: {
+                click: {fn:function(r) {
+                	var formPanel = Ext.getCmp('modx-panel-resource');
+                	var openToggle = Ext.getCmp('upfront-toggle-open');
+                	var closeToggle = Ext.getCmp('upfront-toggle-collapse');
+                	var wrapper = Ext.get('upfront_wrapper');
+                	var actionButtons = Ext.getCmp('modx-action-buttons');
+                	var actionButtonsWrapper = Ext.get('modAB');
+                	
+                	actionButtonsWrapper.addClass('collapsed');
+                	formPanel.collapse(config.animateCollapse);
+                	openToggle.enable();
+                	closeToggle.disable();
+                	actionButtons.hide();
+                	
+                	var fp = Ext.getCmp(this.config.formpanel);
+                	//@TODO this is not correct.
+        			if (fp && fp.isDirty()) {
+        				wrapper.addClass('unsaved-changes');
+        			}
+                	
+                },scope:this}
+            }
         }]
         ,buttons: this.getButtons(config)
     });
+    
     MODx.page.UpdateResource.superclass.constructor.call(this,config);
     if (!Ext.isIE) {
         Ext.EventManager.on(window, 'beforeunload',function(e) {
@@ -45,12 +103,7 @@ MODx.page.UpdateResource = function(config) {
     
 };
 Ext.extend(MODx.page.UpdateResource,MODx.Component,{
-    preview: function() {
-        window.open(this.config.preview_url);
-        return false;
-    }
-    
-    ,duplicate: function(btn,e) {
+    duplicate: function(btn,e) {
         MODx.msg.confirm({
             text: _('resource_duplicate_confirm')
             ,url: MODx.config.connectors_url+'resource/index.php'

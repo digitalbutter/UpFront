@@ -1,5 +1,0 @@
-# ignore everything
-*
-# except components
-!components/
-!.gitignore

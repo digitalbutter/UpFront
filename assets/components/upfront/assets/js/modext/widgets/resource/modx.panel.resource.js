@@ -377,6 +377,7 @@ MODx.panel.Resource = function(config) {
         ,template: config.record.template
         ,anchor: '100%'
     });
+    
     if (config.access_permissions) {
         it.push({
             id: 'modx-resource-access-permissions'
@@ -398,6 +399,39 @@ MODx.panel.Resource = function(config) {
             }]
         });
     };
+    
+    if (MODx.perm.resource_tree) {
+    	
+    	it.push({
+			id: 'modx-page-tree-panel'
+			,title: _('resources')
+			,cls: 'modx-resource-tab'
+			,preventRender: true
+			,layout: 'form'
+			,forceLayout: true
+			,deferredRender: true
+			,labelWidth: 200
+			,bodyStyle: 'padding: 15px 15px 15px 0;'
+			,autoHeight: true
+			,defaults: {
+				border: false
+				,msgTarget: 'side'
+			}
+			,items: [
+				{
+					xtype: 'modx-tree-resource'
+					,title: _('resources')
+					,id: 'modx-resource-tree'
+					,deferredRender: true
+					,preventRender: true
+				}
+			]
+		});
+       
+       showTree = true;
+    }
+
+    
     var its = [];
     its.push({
         html: '<h2>'+_('document_new')+'</h2>'
@@ -407,6 +441,8 @@ MODx.panel.Resource = function(config) {
         ,forceLayout: true
         ,anchor: '100%'
     });
+
+    
     its.push(MODx.getPageStructure(it,{
         id:'modx-resource-tabs'
         ,forceLayout: true
@@ -435,6 +471,8 @@ MODx.panel.Resource = function(config) {
             ,'success': {fn:this.success,scope:this}
             ,'beforeSubmit': {fn:this.beforeSubmit,scope:this}
         }
+        ,collapsible: true
+        ,collapsed: true
     });
     MODx.panel.Resource.superclass.constructor.call(this,config);
     var ta = Ext.get('ta');
