@@ -1,0 +1,29 @@
+#upfront_wrapper {
+    position: absolute;
+    top: 0px;
+    left: 5%;
+    z-index: 999;
+    width: 90%;
+}
+
+#upfront_inner {
+	background: white;
+    border-right: 2px solid red;
+    border-left: 2px solid red;
+    border-bottom: 2px solid red;
+    
+    padding: 1em 2em;
+}
+.upfront-toggle {
+	position: absolute;
+	right: 0px;
+	top: 0px;
+}
+
+#modAB.collapsed {
+	padding: 0px;
+}
+
+#modx-stay-menu {
+	display: none;
+}

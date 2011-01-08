@@ -1,0 +1,53 @@
+# ignore all .htaccess
+.htaccess
+manager/
+connectors/
+index.php
+
+# ignore all IIS files
+web.config
+
+# ignore all config.core.php
+config.core.php
+
+# ignore all compressed js and css
+*-min.css
+*-min.js
+
+# ignore concatenated js
+modext.js
+
+# ignore common root paths for docs and assets
+/docs/
+
+# ignore various IDE project files and folders
+.idea/
+
+# ignore PHP files beginning with test
+test*.php
+
+/assets/components/modxss
+/assets/components/quip
+/assets/components/tinymce
+/core/components/archivist
+/core/components/formit
+/core/components/getpage
+/core/components/getresources
+/core/components/login
+/core/components/quip
+/core/components/simplesearch
+/core/components/taglister
+/core/components/tinymce
+/core/components/ultimateparent
+/core/components/wayfinder
+/core/config
+/core/docs
+/core/error
+/core/export
+/core/ht.access
+/core/import
+/core/lexicon
+/core/model
+/core/packages
+/core/xpdo
+/core/cache
