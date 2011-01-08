@@ -407,7 +407,7 @@ MODx.panel.Resource = function(config) {
     	
     	it.push({
 			id: 'modx-page-tree-panel'
-			,title: _('resources')
+			,title: _('upfront_site_tree')
 			,cls: 'modx-resource-tab'
 			,preventRender: true
 			,layout: 'form'

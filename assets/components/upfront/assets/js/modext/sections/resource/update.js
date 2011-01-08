@@ -35,7 +35,7 @@ MODx.page.UpdateResource = function(config) {
             ,access_permissions: config.access_permissions
         },{
         	xtype: 'button'
-        	,text: 'Edit this page'
+        	,text: _('upfront_open_editor')
         	,renderTo: 'upfront_wrapper'
         	,id: 'upfront-toggle-open'
         	,cls: 'upfront-toggle'
@@ -59,7 +59,7 @@ MODx.page.UpdateResource = function(config) {
             }
         },{
         	xtype: 'button'
-        	,text: 'Close'
+        	,text: _('upfront_collapse_editor')
         	,renderTo: 'upfront_wrapper'
         	,id: 'upfront-toggle-collapse'
         	,cls: 'upfront-toggle'
