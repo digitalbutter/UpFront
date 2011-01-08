@@ -4,8 +4,8 @@ if(!$mgr = $modx->getAuthenticatedUser('mgr')){
 	return;
 }
 
-$managerUrl = $modx->context->getOption('manager_url', MODX_MANAGER_URL, $modx->_userConfig);
-$assetsUrl = $modx->context->getOption('assets_url', MODX_ASSETS_URL, $modx->_userConfig);
+$managerUrl = $modx->context->getOption('manager_url', $modx->config, $modx->_userConfig);
+$assetsUrl = $modx->context->getOption('assets_url', $modx->config, $modx->_userConfig);
 $upfrontAssetsUrl = $assetsUrl . 'components/upfront/assets/';
 $_SERVER['HTTP_MODAUTH'] = $modx->site_id;
 $action = $modx->getOption('action', $_GET, '30');
