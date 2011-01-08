@@ -1,5 +1,5 @@
 #upfront_wrapper {
-    position: absolute;
+    position: fixed;
     top: 0px;
     left: 5%;
     z-index: 999;
@@ -10,18 +10,36 @@
 	width: 100%;
 }
 
+#modx-content {
+    width: 90%;
+    position: relative;
+}
+
+.x-form {
+    width: 100%;
+}
+
+
 #upfront_inner {
-	background: white;
-    border-right: 2px solid red;
-    border-left: 2px solid red;
-    border-bottom: 2px solid red;
+	background: #e5e5e5;
+    border: 2px dotted #555555;
+    border-top: 0px;
     
     padding: 1em 2em;
+
+    max-height: 500px;
+    overflow: auto;
 }
 .upfront-toggle {
 	position: absolute;
 	right: 0px;
 	top: 0px;
+}
+
+#modAB {
+	position: absolute;
+    top: 0px;
+    right: 10%;
 }
 
 #modAB.collapsed {
@@ -35,4 +53,8 @@
 #modx-tv-tabs, #modx-tv-tabs .x-tab-panel-header, #modx-tv-tabs .x-tab-panel-body {
 	/* @TODO: fix this brutal hack - ext is misconfigured somewhere, this is a temp fix. */
 	width: 100% !important;
+}
+
+#upfront_tray {
+    border-bottom: 1px solid #555555;
 }
