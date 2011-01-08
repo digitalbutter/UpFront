@@ -1,4 +1,4 @@
-<div id='upfront_wrapper'>
+<div id='upfront_wrapper' class="collapsed">
 	
 	<div id="upfront_inner">
 		<div id="upfront_tray">
@@ -12,7 +12,21 @@
 				<div id="modx-panel-resource-div"></div>
 			</div>
 		</div>
+		
 	</div>
+	<table id="layoutTable" cellpadding="0" cellspacing="0">
+		<tr>
+			<td id="btm_left">
+				&nbsp;
+			</td>
+			<td id="btm_mid">
+				&nbsp;
+			</td>
+			<td id="btm_right">
+			</td>
+		</tr>
+	</table>
+	
 </div>
 
 [[+onDocFormPrerender]]
