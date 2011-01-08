@@ -34,59 +34,56 @@ MODx.page.UpdateResource = function(config) {
             ,publish_document: config.publish_document
             ,access_permissions: config.access_permissions
         },{
-        	xtype: 'button'
-        	,text: _('upfront_open_editor')
-        	,renderTo: 'btm_right'
-        	,id: 'upfront-toggle-open'
-        	,cls: 'upfront-toggle'
-        	,listeners: {
+            xtype: 'button'
+            ,text: _('upfront_open_editor')
+            ,renderTo: 'upfront_wrapper'
+            ,id: 'upfront-toggle-open'
+            ,cls: 'upfront-toggle'
+            ,listeners: {
                 click: {fn:function(r) {
-                	var formPanel = Ext.getCmp('modx-panel-resource');
-                	var openToggle = Ext.getCmp('upfront-toggle-open');
-                	var closeToggle = Ext.getCmp('upfront-toggle-collapse');
-                	var wrapper = Ext.get('upfront_wrapper');
-                	var actionButtons = Ext.getCmp('modx-action-buttons');
-                	var actionButtonsWrapper = Ext.get('modAB');
-                	
-                	wrapper.removeClass('collapsed');
-                	actionButtonsWrapper.removeClass('collapsed');
-                	formPanel.expand(config.animateCollapse);
-                	actionButtons.show();
-                	openToggle.disable();
-                	closeToggle.enable();
-                	
-                	
+                    var formPanel = Ext.getCmp('modx-panel-resource');
+                    var openToggle = Ext.getCmp('upfront-toggle-open');
+                    var closeToggle = Ext.getCmp('upfront-toggle-collapse');
+                    var wrapper = Ext.get('upfront_wrapper');
+                    var actionButtons = Ext.getCmp('modx-action-buttons');
+                    var actionButtonsWrapper = Ext.get('modAB');
+                    
+                    actionButtonsWrapper.removeClass('collapsed');
+                    formPanel.expand(config.animateCollapse);
+                    actionButtons.show();
+                    openToggle.disable();
+                    closeToggle.enable();
+                    
+                    
                 },scope:this}
             }
         },{
-        	xtype: 'button'
-        	,text: _('upfront_collapse_editor')
-        	,renderTo: 'btm_right'
-        	,id: 'upfront-toggle-collapse'
-        	,cls: 'upfront-toggle'
-        	,disabled: true
-        	,listeners: {
+            xtype: 'button'
+            ,text: _('upfront_collapse_editor')
+            ,renderTo: 'upfront_wrapper'
+            ,id: 'upfront-toggle-collapse'
+            ,cls: 'upfront-toggle'
+            ,disabled: true
+            ,listeners: {
                 click: {fn:function(r) {
-                	var formPanel = Ext.getCmp('modx-panel-resource');
-                	var openToggle = Ext.getCmp('upfront-toggle-open');
-                	var closeToggle = Ext.getCmp('upfront-toggle-collapse');
-                	var wrapper = Ext.get('upfront_wrapper');
-                	var actionButtons = Ext.getCmp('modx-action-buttons');
-                	var actionButtonsWrapper = Ext.get('modAB');
-                	
-                	wrapper.addClass('collapsed');
-                	actionButtonsWrapper.addClass('collapsed');
-                	formPanel.collapse(config.animateCollapse);
-                	openToggle.enable();
-                	closeToggle.disable();
-                	actionButtons.hide();
-                	
-                	var fp = Ext.getCmp(this.config.formpanel);
-                	//@TODO this is not correct.
-        			if (fp && fp.isDirty()) {
-        				wrapper.addClass('unsaved-changes');
-        			}
-                	
+                    var formPanel = Ext.getCmp('modx-panel-resource');
+                    var openToggle = Ext.getCmp('upfront-toggle-open');
+                    var closeToggle = Ext.getCmp('upfront-toggle-collapse');
+                    var wrapper = Ext.get('upfront_wrapper');
+                    var actionButtons = Ext.getCmp('modx-action-buttons');
+                    var actionButtonsWrapper = Ext.get('modAB');
+                    
+                    actionButtonsWrapper.addClass('collapsed');
+                    formPanel.collapse(config.animateCollapse);
+                    openToggle.enable();
+                    closeToggle.disable();
+                    actionButtons.hide();
+                    
+                    var fp = Ext.getCmp(this.config.formpanel);
+                    //@TODO this is not correct.
+                    if (fp && fp.isDirty()) {
+                        wrapper.addClass('unsaved-changes');
+                    }
                 },scope:this}
             }
         }]
