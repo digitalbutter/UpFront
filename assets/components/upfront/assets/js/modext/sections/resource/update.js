@@ -36,7 +36,7 @@ MODx.page.UpdateResource = function(config) {
         },{
             xtype: 'button'
             ,text: _('upfront_open_editor')
-            ,renderTo: 'upfront_wrapper'
+            ,renderTo: 'btm_right'
             ,id: 'upfront-toggle-open'
             ,cls: 'upfront-toggle'
             ,listeners: {
@@ -48,6 +48,7 @@ MODx.page.UpdateResource = function(config) {
                     var actionButtons = Ext.getCmp('modx-action-buttons');
                     var actionButtonsWrapper = Ext.get('modAB');
                     
+                    wrapper.removeClass('collapsed');
                     actionButtonsWrapper.removeClass('collapsed');
                     formPanel.expand(config.animateCollapse);
                     actionButtons.show();
@@ -60,7 +61,7 @@ MODx.page.UpdateResource = function(config) {
         },{
             xtype: 'button'
             ,text: _('upfront_collapse_editor')
-            ,renderTo: 'upfront_wrapper'
+            ,renderTo: 'btm_right'
             ,id: 'upfront-toggle-collapse'
             ,cls: 'upfront-toggle'
             ,disabled: true
@@ -73,6 +74,7 @@ MODx.page.UpdateResource = function(config) {
                     var actionButtons = Ext.getCmp('modx-action-buttons');
                     var actionButtonsWrapper = Ext.get('modAB');
                     
+                    wrapper.addClass('collapsed');
                     actionButtonsWrapper.addClass('collapsed');
                     formPanel.collapse(config.animateCollapse);
                     openToggle.enable();
