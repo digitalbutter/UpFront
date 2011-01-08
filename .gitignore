@@ -51,3 +51,5 @@ test*.php
 /core/packages
 /core/xpdo
 /core/cache
+
+!assets/components/upfront/connectors/
