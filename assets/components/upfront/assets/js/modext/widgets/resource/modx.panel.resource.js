@@ -540,6 +540,15 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
         });
     }
     ,success: function(o) {
+    	
+    	Ext.Msg.confirm(_('upfront_resource_saved'), _('upfront_resource_saved_msg'), function(e) {
+			if (e == 'yes') {
+				window.location.reload();
+			} else {
+				//let the man get on wit his bidniz
+			}
+        });
+    	
         var g = Ext.getCmp('modx-grid-resource-security');
         if (g) { g.getStore().commitChanges(); }
         var t = Ext.getCmp('modx-resource-tree');

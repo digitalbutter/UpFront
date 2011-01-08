@@ -18,11 +18,12 @@ switch($modx->event->name){
 		$modx->regClientCSS($managerUrl . "templates/default/css/modx-min.css");
 		/* CSS REGISTERED FOR CUSTOM RULES (Resets) */
 		$modx->regClientCSS($assetsUrl . "css/reset.css");
+		$modx->regClientCSS($assetsUrl . "css/style.css");
 		/* STOCK MODX FILES */
 		$modx->regClientStartupScript($managerUrl."assets/ext3/adapter/ext/ext-base.js");
 		$modx->regClientStartupScript($managerUrl."assets/ext3/ext-all.js");
 		$modx->regClientStartupScript($managerUrl."assets/modext/build/core/modx-min.js");
-		$modx->regClientStartupScript($siteUrl . "connectors/lang.js.php?ctx=mgr&topic=topmenu,file,resource,resource&action=30");
+		$modx->regClientStartupScript($siteUrl . "connectors/lang.js.php?ctx=mgr&topic=topmenu,file,resource,resourceupdate&action=30");
 		$modx->regClientStartupScript($siteUrl . "connectors/layout/modx.config.js.php?action=30&wctx=web");
 		$modx->regClientStartupScript($managerUrl."assets/modext/modext.js?v=206pl");
 		$modx->regClientStartupScript($managerUrl.'assets/modext/util/datetime.js');
