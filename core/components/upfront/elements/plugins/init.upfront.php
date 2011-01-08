@@ -7,31 +7,36 @@ if(!$mgr = $modx->getAuthenticatedUser('mgr')){
 
 
 $managerUrl = $modx->context->getOption('manager_url', MODX_MANAGER_URL, $modx->_userConfig);
-$assetsUrl = $modx->context->getOption('assets_url', MODX_ASSETS_URL, $modx->_userConfig) . 'components/upfront/assets/';
+$assetsUrl = $modx->context->getOption('assets_url', MODX_ASSETS_URL, $modx->_userConfig);
+$upfrontAssetsUrl = $assetsUrl . 'components/upfront/assets/';
 $_SERVER['HTTP_MODAUTH'] = $modx->site_id;
 
 switch($modx->event->name){
     case "OnWebPageInit":
+    	$action = $modx->getOption('action', $_GET, '30');
         /* CSS REGISTERED FOR EXT RENDERING */
 		/* @TODO - check which manager theme we should be using */
 		$modx->regClientCSS($managerUrl . "assets/ext3/resources/css/ext-all-notheme-min.css");
 		$modx->regClientCSS($managerUrl . "templates/default/css/modx-min.css");
 		/* CSS REGISTERED FOR CUSTOM RULES (Resets) */
-		$modx->regClientCSS($assetsUrl . "css/reset.css");
+		$modx->regClientCSS($upfrontAssetsUrl . "css/reset.css");
+		$modx->regClientCSS($upfrontAssetsUrl . "css/style.css");
 		/* STOCK MODX FILES */
 		$modx->regClientStartupScript($managerUrl."assets/ext3/adapter/ext/ext-base.js");
 		$modx->regClientStartupScript($managerUrl."assets/ext3/ext-all.js");
-		$modx->regClientStartupScript($managerUrl."assets/modext/build/core/modx-min.js");
-		$modx->regClientStartupScript($siteUrl . "connectors/lang.js.php?ctx=mgr&topic=topmenu,file,resource,resource&action=30");
+		$modx->regClientStartupScript($managerUrl."assets/modext/core/modx.js");
 		$modx->regClientStartupScript($siteUrl . "connectors/layout/modx.config.js.php?action=30&wctx=web");
+
+		$modx->regClientStartupScript($siteUrl . "connectors/lang.js.php?ctx=mgr&topic=topmenu,file,resource,resourceupdate&action=" . $action);
+		$modx->regClientStartupScript($assetsUrl . "components/upfront/connectors/lang.js.php?ctx=mgr&topic=resourceupdate&action=" . $action);
 		$modx->regClientStartupScript($managerUrl."assets/modext/modext.js?v=206pl");
 		$modx->regClientStartupScript($managerUrl.'assets/modext/util/datetime.js');
 		$modx->regClientStartupScript($managerUrl.'assets/modext/widgets/element/modx.panel.tv.renders.js');
 		$modx->regClientStartupScript($managerUrl.'assets/modext/widgets/resource/modx.grid.resource.security.js');
 		$modx->regClientStartupScript($managerUrl.'assets/modext/widgets/resource/modx.panel.resource.tv.js');
 		/* NON-MODX FILES LOADED FROM UPFRONT ASSETS DIR */
-		$modx->regClientStartupScript($assetsUrl.'js/modext/widgets/resource/modx.panel.resource.js');
-		$modx->regClientStartupScript($assetsUrl.'js/modext/sections/resource/update.js');
+		$modx->regClientStartupScript($upfrontAssetsUrl.'js/modext/widgets/resource/modx.panel.resource.js');
+		$modx->regClientStartupScript($upfrontAssetsUrl.'js/modext/sections/resource/update.js');
 		
 		$resource=  $modx->getObject('modResource', $modx->resourceIdentifier);
 		$record = $resource->toArray();

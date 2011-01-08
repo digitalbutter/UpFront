@@ -2,7 +2,7 @@
 	
 	<div id="upfront_inner">
 		<div id="upfront_tray">
-			<p>Welcome back, [[+modx.user.id:userinfo=`fullname`]]
+			<p>[[%upfront_welcome-back? &namespace=`upfront` &topic=`resourceupdate` &username=`[[+modx.user.id:userinfo=`fullname`]]`]]</p>
 		</div>
 		<div id="modx-mainpanel">
 			<div id="modAB"></div>
