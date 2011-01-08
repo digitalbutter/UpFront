@@ -43,7 +43,7 @@ switch($modx->event->name){
 		$modx->regClientStartupHTMLBlock('
 		<script type="text/javascript">
 		// <![CDATA[
-		var resource = ' . $resource->get('id'). ';
+		var resource = ' . $resource->get('id') . ';
 		MODx.config.publish_document = "'.$publish_document.'";
 		MODx.onDocFormRender = "'.$onDocFormRender.'";
 		MODx.ctx = "mgr";
@@ -101,14 +101,40 @@ switch($modx->event->name){
 		$properties['which_editor'] = $rte;
 		
 		if ($context->getOption('use_editor', false, $modx->_userConfig) && !empty($rte)) {
-			
+			if ($rte == 'TinyMCE'){
+				$modx->regClientScript('
+				<script type="text/javascript">
+					function UpFrontTinyKeyUp (ed,e) {
+						if (!Ext.isEmpty(tinyMCE)) {
+							ed.save();
+							try {
+								var ta = Ext.get(ed.id);
+								if (ta) {
+									ta.dom.value = ed.getContent();
+									ta.dom.innerHTML = ta.dom.value;
+									Ext.select(\'div.UfEditable.content_\' + resource).update(ta.getValue());
+								}
+							} catch (e) {}
+						}
+
+						var pr = Ext.getCmp(\'modx-panel-resource\');
+						if (pr) pr.markDirty();
+					}
+					Ext.onReady(function() {
+						Tiny.config.setup = function(ed) {
+							ed.onKeyUp.add(UpFrontTinyKeyUp);
+						};
+						Tiny.templates = [];
+					});
+				</script>
+				');
+			}
 			/* invoke OnRichTextEditorRegister event */
 			$text_editors = $modx->invokeEvent('OnRichTextEditorRegister');
 			$properties['text_editors'] = $text_editors;
 		
 			$replace_richtexteditor = array('ta');
 			$properties['replace_richtexteditor'] = $replace_richtexteditor;
-		
 			/* invoke OnRichTextEditorInit event */
 			$onRichTextEditorInit = $modx->invokeEvent('OnRichTextEditorInit',array(
 				'editor' => $rte,
@@ -135,7 +161,6 @@ switch($modx->event->name){
 		
 		
 		$modx->regClientHTMLBlock($injectHTML);
-		
         break;
 }
 

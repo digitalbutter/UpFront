@@ -20,6 +20,12 @@ MODx.panel.Resource = function(config) {
             ,height: 400
             ,grow: false
             ,value: (config.record.content || config.record.ta) || ''
+            ,enableKeyEvents: true
+            ,listeners: {
+                'change': {scope:this,fn:function(f,e) {
+                    Ext.select('div.UfEditable.content_' + resource).update(f.getValue());
+                }}
+            }
         },{
             id: 'modx-content-below'
             ,border: false
@@ -102,6 +108,7 @@ MODx.panel.Resource = function(config) {
             ,listeners: {
                 'keyup': {scope:this,fn:function(f,e) {
                     Ext.getCmp('modx-resource-header').getEl().update('<h2>'+_('document')+': '+f.getValue()+'</h2>');
+                    Ext.select('div.UfEditable.pagetitle_' + resource).update(f.getValue());
                 }}
             }
             
@@ -114,7 +121,12 @@ MODx.panel.Resource = function(config) {
             ,maxLength: 255
             ,anchor: '75%'
             ,value: config.record.longtitle || ''
-            
+            ,enableKeyEvents: true
+            ,listeners: {
+                'keyup': {scope:this,fn:function(f,e) {
+                    Ext.select('div.UfEditable.longtitle_' + resource).update(f.getValue());
+                }}
+            }
         },{
             xtype: 'textfield'
             ,fieldLabel: _('resource_description')
@@ -124,7 +136,12 @@ MODx.panel.Resource = function(config) {
             ,maxLength: 255
             ,anchor: '75%'
             ,value: config.record.description || ''
-            
+            ,enableKeyEvents: true
+            ,listeners: {
+                'keyup': {scope:this,fn:function(f,e) {
+                    Ext.select('div.UfEditable.description_' + resource).update(f.getValue());
+                }}
+            }
         },{
             xtype: 'textfield'
             ,fieldLabel: _('resource_alias')
@@ -154,7 +171,12 @@ MODx.panel.Resource = function(config) {
             ,grow: true
             ,anchor: '90%'
             ,value: config.record.introtext || ''
-            
+            ,enableKeyEvents: true
+            ,listeners: {
+                'keyup': {scope:this,fn:function(f,e) {
+                    Ext.select('div.UfEditable.introtext_' + resource).update(f.getValue());
+                }}
+            }
         },{
             xtype: 'modx-field-parent-change'
             ,fieldLabel: _('resource_parent')
@@ -177,7 +199,12 @@ MODx.panel.Resource = function(config) {
             ,maxLength: 255
             ,anchor: '70%'
             ,value: config.record.menutitle || ''
-            
+            ,enableKeyEvents: true
+            ,listeners: {
+                'keyup': {scope:this,fn:function(f,e) {
+                    Ext.select('div.UfEditable.menutitle' + resource).update(f.getValue());
+                }}
+            }
         },{
             xtype: 'numberfield'
             ,fieldLabel: _('resource_menuindex')
@@ -404,37 +431,37 @@ MODx.panel.Resource = function(config) {
     };
     
     if (MODx.perm.resource_tree) {
-    	
-    	it.push({
-			id: 'modx-page-tree-panel'
-			,title: _('upfront_site_tree')
-			,cls: 'modx-resource-tab'
-			,preventRender: true
-			,layout: 'form'
-			,forceLayout: true
-			,deferredRender: true
-			,labelWidth: 200
-			,bodyStyle: 'padding: 15px 15px 15px 0;'
-			,autoHeight: true
-			,defaults: {
-				border: false
-				,msgTarget: 'side'
-			}
-			,items: [
-				{
-					xtype: 'modx-tree-resource'
-					,title: _('resources')
-					,id: 'modx-resource-tree'
-					,deferredRender: true
-					,preventRender: true
-				}
-			]
-		});
+        
+        it.push({
+            id: 'modx-page-tree-panel'
+            ,title: _('upfront_site_tree')
+            ,cls: 'modx-resource-tab'
+            ,preventRender: true
+            ,layout: 'form'
+            ,forceLayout: true
+            ,deferredRender: true
+            ,labelWidth: 200
+            ,bodyStyle: 'padding: 15px 15px 15px 0;'
+            ,autoHeight: true
+            ,defaults: {
+                border: false
+                ,msgTarget: 'side'
+            }
+            ,items: [
+                {
+                    xtype: 'modx-tree-resource'
+                    ,title: _('resources')
+                    ,id: 'modx-resource-tree'
+                    ,deferredRender: true
+                    ,preventRender: true
+                }
+            ]
+        });
        
        showTree = true;
     }
 
-	
+    
     
     var its = [];
     its.push({
@@ -540,15 +567,15 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
         });
     }
     ,success: function(o) {
-    	
-    	Ext.Msg.confirm(_('upfront_resource_saved'), _('upfront_resource_saved_msg'), function(e) {
-			if (e == 'yes') {
-				window.location.reload();
-			} else {
-				//let the man get on wit his bidniz
-			}
+        
+        Ext.Msg.confirm(_('upfront_resource_saved'), _('upfront_resource_saved_msg'), function(e) {
+            if (e == 'yes') {
+                window.location.reload();
+            } else {
+                //let the man get on wit his bidniz
+            }
         });
-    	
+        
         var g = Ext.getCmp('modx-grid-resource-security');
         if (g) { g.getStore().commitChanges(); }
         var t = Ext.getCmp('modx-resource-tree');
