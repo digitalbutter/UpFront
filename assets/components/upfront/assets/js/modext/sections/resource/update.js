@@ -6,6 +6,7 @@
  * @param {Object} config An object of config properties
  * @xtype modx-page-resource-update
  */
+
 MODx.page.UpdateResource = function(config) {
     config = config || {record:{}};
     config.record = config.record || {};
