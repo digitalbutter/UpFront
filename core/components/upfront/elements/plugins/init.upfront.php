@@ -38,6 +38,7 @@ switch($modx->event->name){
 		$modx->regClientStartupHTMLBlock('
 		<script type="text/javascript">
 		// <![CDATA[
+		var resource = ' . $resource->get('id'). ';
 		MODx.config.publish_document = "'.$publish_document.'";
 		MODx.onDocFormRender = "'.$onDocFormRender.'";
 		MODx.ctx = "mgr";
@@ -62,11 +63,72 @@ switch($modx->event->name){
 		// ]]>
 		</script>');
 		
-		//@TODO: parse with chunk->process for custom welcome etc.
+		
+		//parse with chunk->process for custom welcome and to allow for output of plugin events etc.
+		$properties = array();
+		
+		/* invoke OnDocFormPrerender event */
+		$onDocFormPrerender = $modx->invokeEvent('OnDocFormPrerender',array(
+			'id' => $resource->get('id'),
+			'resource' => &$resource,
+			'mode' => modSystemEvent::MODE_UPD,
+		));
+		if (is_array($onDocFormPrerender)) {
+			$onDocFormPrerender = implode('',$onDocFormPrerender);
+		}
+		
+		/* invoke OnDocFormRender event */
+		$onDocFormRender = $modx->invokeEvent('OnDocFormRender',array(
+			'id' => $resource->get('id'),
+			'resource' => &$resource,
+			'mode' => modSystemEvent::MODE_UPD,
+		));
+		if (is_array($onDocFormRender)) $onDocFormRender = implode('',$onDocFormRender);
+		$onDocFormRender = str_replace(array('"',"\n","\r"),array('\"','',''),$onDocFormRender);
+		
+		/*
+		 *  Initialize RichText Editor
+		 */
+		/* Set which RTE */
+		
+		$context = $modx->getObject('modContext',$resource->get('context_key'));
+		$rte = isset($_REQUEST['which_editor']) ? $_REQUEST['which_editor'] : $context->getOption('which_editor', '', $modx->_userConfig);
+		$properties['which_editor'] = $rte;
+		
+		if ($context->getOption('use_editor', false, $modx->_userConfig) && !empty($rte)) {
+			
+			/* invoke OnRichTextEditorRegister event */
+			$text_editors = $modx->invokeEvent('OnRichTextEditorRegister');
+			$properties['text_editors'] = $text_editors;
+		
+			$replace_richtexteditor = array('ta');
+			$properties['replace_richtexteditor'] = $replace_richtexteditor;
+		
+			/* invoke OnRichTextEditorInit event */
+			$onRichTextEditorInit = $modx->invokeEvent('OnRichTextEditorInit',array(
+				'editor' => $rte,
+				'elements' => $replace_richtexteditor,
+				'id' => $resource->get('id'),
+				'resource' => &$resource,
+				'mode' => modSystemEvent::MODE_UPD,
+			));
+			if (is_array($onRichTextEditorInit)) {
+				$onRichTextEditorInit = implode('',$onRichTextEditorInit);
+				
+			}
+			
+		}
+		
+		$properties['onDocFormPrerender'] = ($onDocFormPrerender) ? $onDocFormPrerender: "";
+		$properties['onRichTextEditorInit'] = ($onRichTextEditorInit) ? $onRichTextEditorInit: "";
+		$properties['onDocFormRender'] = ($onDocFormRender) ? $onDocFormRender: "";
+		
 		$chunk = $modx->newObject('modChunk');
 		$tpl = file_get_contents(MODX_CORE_PATH . 'components/upfront/elements/templates/update.tpl');
 		$chunk->setContent($tpl);
-		$injectHTML = $chunk->process();
+		$injectHTML = $chunk->process($properties);
+		
+		
 		$modx->regClientHTMLBlock($injectHTML);
 		
         break;
