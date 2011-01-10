@@ -1,139 +1,26 @@
-#upfront_wrapper {
-    position: fixed;
-    top: 0px;
-    left: 5%;
-    z-index: 999;
-    width: 90%;
-}
-
-#modx-mainpanel {
-	width: 100%;
-}
-
-#modx-content {
-    width: 99%;
-    position: relative;
-}
-
-.x-form {
-    width: 100%;
-}
-
-#upfront_inner {
-    border-top: 0px;
-    padding: 1em 2em;
-    max-height: 500px;
-    overflow: auto;
-    position: relative;
-    background: rgba(255,255,255, 0.8);
-    border-bottom: 3px solid #aaa;
-    border-right: 1px solid #aaa;
-    border-left: 1px solid #aaa;
-}
-
-.skinElement {
-	display: block;
-	
-}
-
-#btm_left {
-	float: left;
-	background-image: url(skin/upfront_sprite.png);
-	background-repeat: no-repeat;
-	background-position: -2px -100px;
-	width: 178px;
-	height: 50px;
-}
-
-#btm_right { 
-	width: 178px;
-	height: 50px;
-}
-
-#btm_mid {
-	background-image: url(skin/upfront_sprite.png);
-	background-repeat: repeat-x;
-	background-position: 0 -150px;
-	width: 100%;
-}
-
-#layoutTable {
-	width: 100%;
-	opacity: .8;
-    -moz-opacity: .8;
-    filter: alpha(opacity=80);
-}
-
-#upfront-toggle-open .x-btn-mc em {
-	background-image: url(skin/upfront_sprite.png);
-	background-repeat: no-repeat;
-	text-indent: -9999px;
-	display: block;
-	height: 50px;
-	width: 178px;
-	background-position: 0 0;
-}
-
-#upfront-toggle-collapse .x-btn-mc em {
-	background-image: url(skin/upfront_sprite.png);
-	background-repeat: no-repeat;
-	text-indent: -9999px;
-	display: block;
-	height: 50px;
-	width: 178px;
-	background-position: 0 -50px;
-}
-
-#upfront-toggle-open, #upfront-toggle-collapse {
-	background: transparent;
-	border: none;
-}
-
-.upfront-toggle {
-	float: right;
-	margin: 0px;
-	-moz-box-shadow: none;
-	box-shadow: none;
-	-webkit-box-shadow: none;
-}
-
-.upfront-toggle td {
-	display: none;
-}
-
-.upfront-toggle .x-btn-mc {
-	display: block;
-}
-
-#upfront-toggle-collapse.x-item-disabled, #upfront-toggle-open.x-item-disabled {
-	display: none;
-}
-
-#modAB {
-	position: absolute;
-    top: 0px;
-    right: 2%;
-}
-
-#modAB.collapsed {
-	padding: 0px;
-}
-
-#modx-stay-menu {
-	display: none;
-}
-
-#modx-tv-tabs, #modx-tv-tabs .x-tab-panel-header, #modx-tv-tabs .x-tab-panel-body {
-	/* @TODO: fix this brutal hack - ext is misconfigured somewhere, this is a temp fix. */
-	width: 100% !important;
-}
-
-#upfront_tray {
-    border-bottom: 1px solid #555555;
-    font-weight: bold;
-    color: #333;
-}
-
-.collapsed #upfront_inner {
-	display: none;
-}
+#upfront_wrapper{position:fixed;top:0px;left:5%;z-index:999;width:90%;}
+#upfront_wrapper #modx-mainpanel{width:100%;}
+#upfront_wrapper #modx-content{width:99%;position:relative;}
+#upfront_wrapper .x-form{width:100%;}
+#upfront_wrapper #upfront_inner{border-top:0px;padding:1em 2em;max-height:500px;overflow:auto;position:relative;background:rgba(255,255,255,0.8);border-bottom:3px solid #aaa;border-right:1px solid #aaa;border-left:1px solid #aaa;}
+#upfront_wrapper .skinElement{display:block;}
+#upfront_wrapper #btm_left{float:left;background-image:url(skin/upfront_sprite.png);background-repeat:no-repeat;background-position:-2px -100px;width:178px;height:50px;}
+#upfront_wrapper #btm_right{width:178px;height:50px;}
+#upfront_wrapper #btm_mid{background-image:url(skin/upfront_sprite.png);background-repeat:repeat-x;background-position:0 -150px;width:100%;}
+#upfront_wrapper #layoutTable{width:100%;opacity:.8;-moz-opacity:.8;filter:alpha(opacity=80);}
+#upfront_wrapper #upfront-toggle-open .x-btn-mc em{background-image:url(skin/upfront_sprite.png);background-repeat:no-repeat;text-indent:-9999px;display:block;height:50px;width:178px;background-position:0 0;}
+#upfront_wrapper #upfront-toggle-collapse .x-btn-mc em{background-image:url(skin/upfront_sprite.png);background-repeat:no-repeat;text-indent:-9999px;display:block;height:50px;width:178px;background-position:0 -50px;}
+#upfront_wrapper #upfront-toggle-open,
+#upfront_wrapper #upfront-toggle-collapse{background:transparent;border:none;}
+#upfront_wrapper .upfront-toggle{float:right;margin:0px;-moz-box-shadow:none;box-shadow:none;-webkit-box-shadow:none;}
+#upfront_wrapper .upfront-toggle td{display:none;}
+#upfront_wrapper .upfront-toggle .x-btn-mc{display:block;}
+#upfront_wrapper #upfront-toggle-collapse.x-item-disabled,
+#upfront_wrapper #upfront-toggle-open.x-item-disabled{display:none;}
+#upfront_wrapper #modAB{position:absolute;top:0px;right:2%;}
+#upfront_wrapper #modAB.collapsed{padding:0px;}
+#upfront_wrapper #modx-stay-menu{display:none;}
+#upfront_wrapper #modx-tv-tabs,#modx-tv-tabs .x-tab-panel-header,
+#upfront_wrapper #modx-tv-tabs .x-tab-panel-body{width:100% !important;}
+#upfront_wrapper #upfront_tray{border-bottom:1px solid #555555;font-weight:bold;color:#333;}
+#upfront_wrapper.collapsed #upfront_inner{display:none;}

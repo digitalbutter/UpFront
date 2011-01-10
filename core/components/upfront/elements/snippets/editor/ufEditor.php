@@ -11,8 +11,8 @@ $action = $modx->getOption('action', $_GET, '30');
 
 /* CSS REGISTERED FOR EXT RENDERING */
 /* @TODO - check which manager theme we should be using */
-$modx->regClientCSS($upfrontAssetsUrl . "css/ext-all-notheme.css");
-$modx->regClientCSS($managerUrl . "templates/default/css/modx-min.css");
+$modx->regClientCSS($upfrontAssetsUrl . "css/ext-all.min.contextual.css");
+$modx->regClientCSS($upfrontAssetsUrl . "css/modx-min.contextual.css");
 /* CSS REGISTERED FOR CUSTOM RULES (Resets) */
 $modx->regClientCSS($upfrontAssetsUrl . "css/reset.css");
 $modx->regClientCSS($upfrontAssetsUrl . "css/style.css");
