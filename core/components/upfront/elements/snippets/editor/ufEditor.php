@@ -30,6 +30,7 @@ $modx->regClientStartupScript($managerUrl.'assets/modext/widgets/element/modx.pa
 $modx->regClientStartupScript($managerUrl.'assets/modext/widgets/resource/modx.grid.resource.security.js');
 $modx->regClientStartupScript($managerUrl.'assets/modext/widgets/resource/modx.panel.resource.tv.js');
 /* NON-MODX FILES LOADED FROM UPFRONT ASSETS DIR */
+$modx->regClientStartupScript($upfrontAssetsUrl.'js/modext/widgets/resource/modx.window.resource.js');
 $modx->regClientStartupScript($upfrontAssetsUrl.'js/modext/widgets/resource/modx.panel.resource.js');
 $modx->regClientStartupScript($upfrontAssetsUrl.'js/modext/sections/resource/update.js');
 

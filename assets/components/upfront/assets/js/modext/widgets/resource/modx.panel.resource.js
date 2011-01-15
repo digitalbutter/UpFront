@@ -662,3 +662,4 @@ MODx.triggerRTEOnChange = function() {
 MODx.fireResourceFormChange = function(f,nv,ov) {
     Ext.getCmp('modx-panel-resource').fireEvent('fieldChange');
 };
+
