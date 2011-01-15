@@ -24,3 +24,6 @@
 #upfront_wrapper #modx-tv-tabs .x-tab-panel-body{width:100% !important;}
 #upfront_wrapper #upfront_tray{border-bottom:1px solid #555555;font-weight:bold;color:#333;}
 #upfront_wrapper.collapsed #upfront_inner{display:none;}
+.UfEditable:hover {
+	background: yellow !important;
+}

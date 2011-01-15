@@ -92,7 +92,7 @@ $onDocFormRender = str_replace(array('"',"\n","\r"),array('\"','',''),$onDocForm
 /* Set which RTE */
 
 $context = $modx->getObject('modContext',$resource->get('context_key'));
-$rte = isset($_REQUEST['which_editor']) ? $_REQUEST['which_editor'] : $context->getOption('which_editor', '', $modx->_userConfig);
+$rte = isset($_REQUEST['which_editor']) ? $_REQUEST['which_editor'] : $context->getOption('which_editor');
 $properties['which_editor'] = $rte;
 
 if ($context->getOption('use_editor') && !empty($rte)) {
