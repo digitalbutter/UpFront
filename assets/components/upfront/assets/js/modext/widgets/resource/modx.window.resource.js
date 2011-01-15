@@ -114,12 +114,18 @@ var editSection = function(e) {
 			,fields: [
 				{
 					xtype: upfrontEmbeddedEdit.xtypes[fieldName].xtype
-					,id: 'upfront-editabe-' + className
+					,id: 'upfront-editable-' + className
 					,fieldLabel: upfrontEmbeddedEdit.xtypes[fieldName].fieldLabel
 					,name: fieldName
 					,resourceIdentifier: fieldResourceIdentifier
 					,width: upfrontEmbeddedEdit.xtypes[fieldName].width
 					,editable: upfrontEmbeddedEdit.xtypes[fieldName].editable
+				},
+				{
+					xtype: 'hidden'
+					,id: 'upfront-editable-resourceIdentifier-' + className
+					,name: 'id'
+					,value: fieldResourceIdentifier
 				}
 			] 
 			,listeners: {
