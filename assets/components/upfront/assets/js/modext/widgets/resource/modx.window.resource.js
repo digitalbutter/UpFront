@@ -3,12 +3,13 @@ MODx.window.EditableField = function(config) {
     this.ident = config.ident || 'upfront-'+Ext.id();
     Ext.applyIf(config,{
         title: 'UpFront'
-        ,url: MODx.config.site_url+'connectors/shopping-cart/products.php'
+        ,url: MODx.config.connectors_url+'resource/index.php'
         ,id: this.ident
         ,renderTo: 'upfront_wrapper'
-        ,action: 'newImage'
         ,baseParams: {
-        	action: 'newimage'
+        	action: 'getNodes'
+        	,node: 'web_0'
+        	,sortBy: 'menuindex'
         }
         ,fields: config.fields
     });
@@ -104,6 +105,7 @@ var editSection = function(e) {
 	var class = className.replace('UfEditable', '');
 	class = class.replace('ufHighlighted', '');
 	class = Ext.util.Format.trim(class);
+	className = class;
 	class = class.split('_');
 	var fieldName = class[0];
 	var fieldResourceIdentifier = class[1];
@@ -120,6 +122,12 @@ var editSection = function(e) {
 					,resourceIdentifier: fieldResourceIdentifier
 					,width: upfrontEmbeddedEdit.xtypes[fieldName].width
 					,editable: upfrontEmbeddedEdit.xtypes[fieldName].editable
+					,enableKeyEvents: true
+					,listeners: {
+						'keyup': {scope:this,fn:function(f,e) {
+							Ext.select('div.UfEditable.' + className).update(f.getValue());
+						}}
+					}
 				},
 				{
 					xtype: 'hidden'
