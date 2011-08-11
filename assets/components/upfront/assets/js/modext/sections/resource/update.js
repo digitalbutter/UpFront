@@ -114,7 +114,7 @@ Ext.extend(MODx.page.UpdateResource,MODx.Component,{
             }
             ,listeners: {
                 success: {fn:function(r) {
-                    location.href = '?a='+MODx.action['resource/update']+'&id='+r.object.id;
+                    location.href = '&id='+r.object.id;
                 },scope:this}
             }
         });
@@ -166,11 +166,6 @@ Ext.extend(MODx.page.UpdateResource,MODx.Component,{
             ,text: _('cancel')
             ,handler: this.cancel
             ,scope: this
-        });
-        btns.push('-');
-        btns.push({
-            text: _('help_ex')
-            ,handler: MODx.loadHelpPane
         });
         return btns;
     }

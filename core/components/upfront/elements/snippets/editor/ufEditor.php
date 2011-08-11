@@ -1,4 +1,5 @@
 <?php
+
 if(!$mgr = $modx->getAuthenticatedUser('mgr')){
 	return;
 }
@@ -68,7 +69,10 @@ Ext.onReady(function() {
 //parse with chunk->process for custom welcome and to allow for output of plugin events etc.
 $properties = array();
 
+//@TODO fire these events so custom tvs can load properly...
+
 /* invoke OnDocFormPrerender event */
+/*
 $onDocFormPrerender = $modx->invokeEvent('OnDocFormPrerender',array(
 	'id' => $resource->get('id'),
 	'resource' => &$resource,
@@ -77,8 +81,10 @@ $onDocFormPrerender = $modx->invokeEvent('OnDocFormPrerender',array(
 if (is_array($onDocFormPrerender)) {
 	$onDocFormPrerender = implode('',$onDocFormPrerender);
 }
+*/
 
 /* invoke OnDocFormRender event */
+/*
 $onDocFormRender = $modx->invokeEvent('OnDocFormRender',array(
 	'id' => $resource->get('id'),
 	'resource' => &$resource,
@@ -86,6 +92,7 @@ $onDocFormRender = $modx->invokeEvent('OnDocFormRender',array(
 ));
 if (is_array($onDocFormRender)) $onDocFormRender = implode('',$onDocFormRender);
 $onDocFormRender = str_replace(array('"',"\n","\r"),array('\"','',''),$onDocFormRender);
+*/
 
 /*
  *  Initialize RichText Editor

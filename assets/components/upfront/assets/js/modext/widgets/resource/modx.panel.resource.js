@@ -454,8 +454,16 @@ MODx.panel.Resource = function(config) {
                     ,id: 'modx-resource-tree'
                     ,deferredRender: true
                     ,preventRender: true
+                    ,menuConfig: {
+						renderToAIDS: 'upfront_wrapper'
+						,menuConfig: {
+							renderToAIDS: 'upfront_wrapper'
+						}
+
+					}
                 }
             ]
+            
         });
        
        showTree = true;
