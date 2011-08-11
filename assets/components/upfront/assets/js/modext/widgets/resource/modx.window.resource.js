@@ -424,12 +424,11 @@ MODx.window.EditableField = function(config) {
     this.ident = config.ident || 'upfront-'+Ext.id();
     Ext.applyIf(config,{
         title: 'UpFront'
-        ,url: MODx.config.connectors_url+'resource/index.php'
+        ,url: MODx.config.site_url+'assets/components/upfront/connectors/mgr.php'
         ,id: this.ident
         ,baseParams: {
-        	action: 'getNodes'
-        	,node: 'web_0'
-        	,sortBy: 'menuindex'
+        	action: 'resource/update'
+        	,id: config.resourceIdentifier
         }
         ,fields: config.fields
     });
@@ -538,7 +537,7 @@ var editSection = function(e) {
 					xtype: upfrontEmbeddedEdit.xtypes[fieldName].xtype
 					,id: 'upfront-editable-' + className
 					,fieldLabel: upfrontEmbeddedEdit.xtypes[fieldName].fieldLabel
-					,name: fieldName
+					,name: 'value'
 					,resourceIdentifier: fieldResourceIdentifier
 					,width: upfrontEmbeddedEdit.xtypes[fieldName].width
 					,editable: upfrontEmbeddedEdit.xtypes[fieldName].editable
@@ -554,10 +553,20 @@ var editSection = function(e) {
 					,id: 'upfront-editable-resourceIdentifier-' + className
 					,name: 'id'
 					,value: fieldResourceIdentifier
+				},
+				{
+					xtype: 'hidden'
+					,name: 'fieldName'
+					,value: fieldName
 				}
 			] 
 			,listeners: {
-				 'success': {fn:function() {
+				 'success': {fn:function(a,b) {
+				 	title = "Error";
+				 	if(a.a.result.success){
+				 		title = 'Success';
+				 	}
+				 	MODx.msg.alert(title, a.a.result.message);
 				},scope:this}
 			}
 		});
