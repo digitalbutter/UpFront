@@ -10,6 +10,10 @@ Ext.override(Ext.ToolTip, {
 	renderTo: 'upfront_wrapper'
 });
 
+Ext.inArray = function(value, collection) {
+    return collection.indexOf(value) !== -1;
+};
+
 Ext.MessageBox = function(){
     var dlg, opt, mask, waitTimer,
         bodyEl, msgEl, textboxEl, textareaEl, progressBar, pp, iconEl, spacerEl,
@@ -500,14 +504,30 @@ var upfrontEmbeddedEdit = function(){
 				"hidemenu":"modx-combo-boolean",
 				"class_key":"textfield",
 				"context_key":"textfield",
-				"content_type":"textfield"
+				"content_type":"textfield",
+				"default_field": {
+					editable: true,
+					xtype: "textfield",
+					fieldLabel: 'Edit Field',
+					width: 400
+				}
 			};
 			Ext.select("div.UfEditable").on("mouseenter", highlightSection);
 			Ext.select("div.UfEditable").on("mouseleave", unHighlightSection);
 			Ext.select("div.UfEditable").on("click", editSection);
+			handleEmptyFields();
 		}
 	}
 }();
+
+function handleEmptyFields(){
+	var fields = Ext.select("div.UfEditable");
+	for(var x = 0; x < fields.elements.length; x++){
+		if(fields.elements[x].innerHTML == ''){
+			fields.elements[x].innerHTML = '&nbsp;';//for now, until a better idea comes along.
+		}
+	}
+}
 
 var highlightSection = function(e) {
 	Ext.get(this).addClass('ufHighlighted');
@@ -526,10 +546,14 @@ var editSection = function(e) {
 	classGiven = Ext.util.Format.trim(classGiven);
 	className = classGiven;
 	classGiven = classGiven.split('_');
-	var fieldName = classGiven[0];
-	var fieldResourceIdentifier = classGiven[1];
+	var fieldResourceIdentifier = classGiven.pop();
+	var fieldName = classGiven.join('_');
 	if(!upfrontEmbeddedEdit.windows[classGiven]){
-	
+		
+		if(upfrontEmbeddedEdit.xtypes[fieldName] === undefined){
+			upfrontEmbeddedEdit.xtypes[fieldName] = upfrontEmbeddedEdit.xtypes['default_field'];
+		}
+				
 		upfrontEmbeddedEdit.windows[classGiven] = MODx.load({
 			xtype: 'modx-window-editable-field'
 			,fields: [
@@ -551,7 +575,7 @@ var editSection = function(e) {
 				{
 					xtype: 'hidden'
 					,id: 'upfront-editable-resourceIdentifier-' + className
-					,name: 'id'
+					,name: 'pk'
 					,value: fieldResourceIdentifier
 				},
 				{
